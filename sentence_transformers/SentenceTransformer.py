@@ -589,7 +589,8 @@ class SentenceTransformer(nn.Sequential):
             show_progress_bar: bool = True,
             checkpoint_path: str = None,
             checkpoint_save_steps: int = 500,
-            checkpoint_save_total_limit: int = 0
+            checkpoint_save_total_limit: int = 0,
+            callback_for_training_progress: Callable[[int, int], None] = None,
             ):
         """
         Train the model with the given training objective
@@ -688,6 +689,8 @@ class SentenceTransformer(nn.Sequential):
                 loss_model.train()
 
             for _ in trange(steps_per_epoch, desc="Iteration", smoothing=0.05, disable=not show_progress_bar):
+                if callback_for_training_progress is not None:
+                    callback_for_training_progress(epoch, training_steps)
                 for train_idx in range(num_train_objectives):
                     loss_model = loss_models[train_idx]
                     optimizer = optimizers[train_idx]
