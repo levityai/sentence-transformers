@@ -688,9 +688,9 @@ class SentenceTransformer(nn.Sequential):
                 loss_model.zero_grad()
                 loss_model.train()
 
-            for _ in trange(steps_per_epoch, desc="Iteration", smoothing=0.05, disable=not show_progress_bar):
+            for i in trange(steps_per_epoch, desc="Iteration", smoothing=0.05, disable=not show_progress_bar):
                 if callback_for_training_progress is not None:
-                    callback_for_training_progress(epoch, training_steps)
+                    callback_for_training_progress(num_train_steps, (epoch+1)*(i+1))
                 for train_idx in range(num_train_objectives):
                     loss_model = loss_models[train_idx]
                     optimizer = optimizers[train_idx]
