@@ -690,7 +690,7 @@ class SentenceTransformer(nn.Sequential):
 
             for i in trange(steps_per_epoch, desc="Iteration", smoothing=0.05, disable=not show_progress_bar):
                 if callback_for_training_progress is not None:
-                    callback_for_training_progress(num_train_steps, (epoch+1)*(i+1))
+                    callback_for_training_progress(num_train_steps, global_step)
                 for train_idx in range(num_train_objectives):
                     loss_model = loss_models[train_idx]
                     optimizer = optimizers[train_idx]
