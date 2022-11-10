@@ -590,7 +590,7 @@ class SentenceTransformer(nn.Sequential):
             checkpoint_path: str = None,
             checkpoint_save_steps: int = 500,
             checkpoint_save_total_limit: int = 0,
-            callback_for_training_progress: Callable[[int, int], None] = None,
+            callback_for_training_progress: Callable[[int, int], None] = None
             ):
         """
         Train the model with the given training objective
